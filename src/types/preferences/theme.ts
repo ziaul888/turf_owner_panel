@@ -44,7 +44,7 @@ export const THEME_PRESET_OPTIONS = [
     label: "Tangerine",
     value: "tangerine",
     primary: {
-      light: "oklch(0.64 0.17 36.44)",
+      light: "oklch(0.35 0.15 178)",
       dark: "oklch(0.64 0.17 36.44)",
     },
   },

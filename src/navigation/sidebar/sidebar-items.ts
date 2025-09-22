@@ -58,6 +58,10 @@ export const sidebarItems: NavGroup[] = [
             url: "/dashboard/default",
             icon: ChartBar,
           },
+          {title:"Notifications",
+            url: "/dashboard/notifications",
+            icon: Mail,
+          },
         ],
       },
       // {
@@ -72,7 +76,7 @@ export const sidebarItems: NavGroup[] = [
         subItems: [
           {
             title: "All Bookings",
-            url: "/dashboard/bookings/all",
+            url: "/dashboard/bookings",
             icon: Calendar,
           },
           {

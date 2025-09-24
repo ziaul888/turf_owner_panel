@@ -1,33 +1,94 @@
-'use client'
-import PageTopSection from './_components/PageTopSection'
-import React, { useState } from 'react'
-import { Card } from '@/components/ui/card'
-import { SectionCards } from '../default/_components/section-cards'
-import { DataTable } from '../default/_components/data-table'
-import data from '../default/_components/data.json'
-import DashBoardCard from '../default/_components/DashBoardCard'
-import { TrendingUp, TrendingDown } from "lucide-react";
+"use client";
+import React from "react";
 
+import { Plus, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
 
-const page = () => {
-    const [openAddBookingModal, setOpenAddBookingModal] = useState(false)
-    const [openEditBookingModal, setOpenEditBookingModal] = useState(false)
+import { Card } from "@/components/ui/card";
+
+import { DataTable } from "../default/_components/data-table";
+import data from "../default/_components/data.json";
+import { SectionCards, CardData } from "../default/_components/section-cards";
+
+import PageTopSection from "./_components/page-top-section";
+import { PageConfig, BookingStats } from "./types";
+
+// Mock booking stats - replace with your actual data source
+const bookingStats: BookingStats = {
+  totalBookings: { value: "1,234", change: "-20%", trending: "down" },
+  completedBookings: { value: "1,234", change: "12.5%", trending: "up" },
+  pendingBookings: { value: "1,234", change: "12.5%", trending: "up" },
+  cancelledBookings: { value: "1,234", change: "12.5%", trending: "up" },
+};
+
+// Convert booking stats to card data
+const bookingCards: CardData[] = [
+  {
+    title: "Total Bookings",
+    value: bookingStats.totalBookings.value,
+    percentage: bookingStats.totalBookings.change,
+    subtitle: bookingStats.totalBookings.trending === "up" ? "increase" : "decrease",
+    icon: <Calendar className="size-4" />,
+  },
+  {
+    title: "Completed",
+    value: bookingStats.completedBookings.value,
+    percentage: bookingStats.completedBookings.change,
+    subtitle: bookingStats.completedBookings.trending === "up" ? "increase" : "decrease",
+    icon: <CheckCircle className="size-4" />,
+  },
+  {
+    title: "Pending",
+    value: bookingStats.pendingBookings.value,
+    percentage: bookingStats.pendingBookings.change,
+    subtitle: bookingStats.pendingBookings.trending === "up" ? "increase" : "decrease",
+    icon: <Clock className="size-4" />,
+  },
+  {
+    title: "Cancelled",
+    value: bookingStats.cancelledBookings.value,
+    percentage: bookingStats.cancelledBookings.change,
+    subtitle: bookingStats.cancelledBookings.trending === "up" ? "increase" : "decrease",
+    icon: <XCircle className="size-4" />,
+  },
+];
+
+const BookingsPage = () => {
+  // Page configuration for reusable PageTopSection
+  const pageConfig: PageConfig = {
+    title: "Bookings",
+    subtitle: "Manage your bookings and reservations",
+    actions: [
+      {
+        label: "Import",
+        icon: <Plus className="size-4" />,
+        variant: "outline",
+        onClick: () => {
+          console.log("Import clicked");
+        },
+      },
+      {
+        label: "Add Booking",
+        icon: <Plus className="size-4" />,
+        variant: "default",
+        onClick: () => {
+          console.log("Add Booking clicked");
+        },
+      },
+    ],
+  };
   return (
-   <div>
-    <Card className='@container/card shadow-xs px-4 sm:px-8' >
-      <PageTopSection setOpenAddBookingModal={setOpenAddBookingModal} setOpenEditBookingModal={setOpenEditBookingModal}/>
-     <div className="@container/main bg-gray-100 p-4 rounded-lg flex flex-col gap-4 md:gap-6">
-     <div className="*:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
-      <DashBoardCard className="from-primary-foreground text-primary" title="Total Booking" value="1,234" percentage="-20%" subtitle="Acquisition needs attention" icon={<TrendingDown className="size-4" />} />
-      <DashBoardCard className="from-primary-foreground text-accent" title="Booking Complate" value="1,234" percentage="12.5%" subtitle="Trending up this month" icon={<TrendingUp className="size-4" />} />
-      <DashBoardCard className="from-destructive/5 text-destructive/70" title="Pending Booking" value="1,234" percentage="12.5%" subtitle="Trending up this month" icon={<TrendingUp className="size-4" />} />
-      <DashBoardCard className="from-primary-foreground text-primary" title="Total Cancel" value="1,234" percentage="12.5%" subtitle="Trending up this month" icon={<TrendingUp className="size-4" />} />
+    <div className="@container/main flex flex-col gap-6 md:gap-6">
+      <Card className="@container/card gap-4 px-4 shadow-xs sm:px-8">
+        {/* Reusable Page Top Section */}
+        <PageTopSection config={pageConfig} />
+        <SectionCards cards={bookingCards} />
+        {/* Data Table Section */}
+        <div className="mt-6">
+          <DataTable data={data} />
+        </div>
+      </Card>
     </div>
-      </div>
-      <DataTable data={data} />
-    </Card>
-   </div>
-  )
-}
+  );
+};
 
-export default page
+export default BookingsPage;

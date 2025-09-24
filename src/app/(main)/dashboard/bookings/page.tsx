@@ -27,28 +27,32 @@ const bookingCards: CardData[] = [
     value: bookingStats.totalBookings.value,
     percentage: bookingStats.totalBookings.change,
     subtitle: bookingStats.totalBookings.trending === "up" ? "increase" : "decrease",
-    icon: <Calendar className="size-4" />,
+    icon: <Calendar className="size-6" />,
+    className: "from-primary-foreground text-primary",
   },
   {
     title: "Completed",
     value: bookingStats.completedBookings.value,
     percentage: bookingStats.completedBookings.change,
     subtitle: bookingStats.completedBookings.trending === "up" ? "increase" : "decrease",
-    icon: <CheckCircle className="size-4" />,
+    icon: <CheckCircle className="size-6" />,
+    className: "from-primary-foreground text-primary",
   },
   {
     title: "Pending",
     value: bookingStats.pendingBookings.value,
     percentage: bookingStats.pendingBookings.change,
     subtitle: bookingStats.pendingBookings.trending === "up" ? "increase" : "decrease",
-    icon: <Clock className="size-4" />,
+    icon: <Clock className="size-6" />,
+    className: "from-primary-foreground text-primary",
   },
   {
     title: "Cancelled",
     value: bookingStats.cancelledBookings.value,
     percentage: bookingStats.cancelledBookings.change,
     subtitle: bookingStats.cancelledBookings.trending === "up" ? "increase" : "decrease",
-    icon: <XCircle className="size-4" />,
+    icon: <XCircle className="size-6" />,
+    className: "from-primary-foreground text-primary",
   },
 ];
 
@@ -81,7 +85,9 @@ const BookingsPage = () => {
       <Card className="@container/card gap-4 px-4 shadow-xs sm:px-8">
         {/* Reusable Page Top Section */}
         <PageTopSection config={pageConfig} />
-        <SectionCards cards={bookingCards} />
+          <div className="bg-gray-100 rounded p-4">
+            <SectionCards cards={bookingCards} />
+          </div>
         {/* Data Table Section */}
         <div className="mt-6">
           <DataTable data={data} />

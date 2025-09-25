@@ -9,6 +9,7 @@ import { DataTable } from "../default/_components/data-table";
 import data from "../default/_components/data.json";
 import { SectionCards, CardData } from "../default/_components/section-cards";
 
+import PageFilterSection from "./_components/page-filter-section";
 import PageTopSection from "./_components/page-top-section";
 import { PageConfig, BookingStats } from "./types";
 
@@ -85,9 +86,50 @@ const BookingsPage = () => {
       <Card className="@container/card gap-4 px-4 shadow-xs sm:px-8">
         {/* Reusable Page Top Section */}
         <PageTopSection config={pageConfig} />
-          <div className="bg-gray-100 rounded p-4">
-            <SectionCards cards={bookingCards} />
-          </div>
+        <div className="rounded bg-gray-100 p-4">
+          <SectionCards cards={bookingCards} />
+        </div>
+        <div className="my-2">
+          <PageFilterSection
+            filters={[
+              {
+                id: "status",
+                label: "Status",
+                placeholder: "Select status",
+                options: [
+                  { value: "all", label: "All Bookings" },
+                  { value: "pending", label: "Pending" },
+                  { value: "confirmed", label: "Confirmed" },
+                  { value: "completed", label: "Completed" },
+                  { value: "cancelled", label: "Cancelled" },
+                ],
+              },
+              {
+                id: "date-range",
+                label: "Date Range",
+                placeholder: "Select date range",
+                options: [
+                  { value: "today", label: "Today" },
+                  { value: "week", label: "This Week" },
+                  { value: "month", label: "This Month" },
+                  { value: "quarter", label: "This Quarter" },
+                  { value: "year", label: "This Year" },
+                ],
+              },
+              {
+                id: "service",
+                label: "Service",
+                placeholder: "Select service",
+                options: [
+                  { value: "all", label: "All Services" },
+                  { value: "consultation", label: "Consultation" },
+                  { value: "treatment", label: "Treatment" },
+                  { value: "follow-up", label: "Follow-up" },
+                ],
+              },
+            ]}
+          />
+        </div>
         {/* Data Table Section */}
         <div className="mt-6">
           <DataTable data={data} />

@@ -86,14 +86,13 @@ const BookingsPage = () => {
 
   return (
     <div className="@container/main flex flex-col gap-6 md:gap-6">
-      <Card className="@container/card gap-4 px-4 shadow-xs sm:px-8">
-        {/* Reusable Page Top Section */}
-        <PageTopSection config={pageConfig} />
-        <div className="rounded bg-gray-100 p-4">
-          <SectionCards cards={bookingCards} />
-        </div>
-        <div className="my-2">
-          <PageFilterSection
+      {/* Reusable Page Top Section */}
+      <PageTopSection config={pageConfig} />
+      <div className="rounded bg-gray-100 p-4 md:p-6 mx-6">
+        <SectionCards cards={bookingCards} />
+      </div>
+      <div className="p-6">
+      <PageFilterSection
             filters={[
     {
       id: "search",
@@ -128,12 +127,13 @@ const BookingsPage = () => {
     },
   ]}
           />
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-8">
+          <div className="lg:col-span-8">
+            <DataTable data={data} />
+          </div>
         </div>
-        {/* Data Table Section */}
-        <div className="mt-6">
-          <DataTable data={data} />
-        </div>
-      </Card>
+      </div>
+      {/* Bookings List - 8 column grid */}
     </div>
   );
 };

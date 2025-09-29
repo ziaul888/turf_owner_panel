@@ -2,6 +2,8 @@ import React from "react";
 
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Car } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 interface FilterOption {
   value: string;
@@ -36,6 +38,7 @@ const PageFilterSection: React.FC<PageFilterSectionProps> = ({
   const selectFilters = filters.filter(f => !f.showSearch);
 
   return (
+    <Card className="@container/card p-6">
     <div className={`flex-col gap-4 space-y-4 ${className}`}>
       <h1 className="text-black text-[700]">{title}</h1>
       <div className="flex w-full justify-between items-center flex-wrap gap-4">
@@ -87,6 +90,7 @@ const PageFilterSection: React.FC<PageFilterSectionProps> = ({
         </div>
       </div>
     </div>
+    </Card>
   );
 };
 

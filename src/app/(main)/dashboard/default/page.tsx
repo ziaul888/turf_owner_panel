@@ -42,7 +42,7 @@ export default function Page() {
   ];
 
   return (
-    <div className="@container/main flex flex-col gap-4 md:gap-6">
+    <div className="@container/main flex flex-col gap-4 p-4 md:gap-6 md:p-6">
       <SectionCards cards={cardData} />
       {/* <ChartAreaInteractive /> */}
       {/* <DataTable data={data} /> */}

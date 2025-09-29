@@ -5,10 +5,9 @@ import { Plus, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 
-import { DataTable } from "../default/_components/data-table";
-import data from "../default/_components/data.json";
 import { SectionCards, CardData } from "../default/_components/section-cards";
 
+import BookingsList from "./_components/bookings-list";
 import PageFilterSection from "./_components/page-filter-section";
 import PageTopSection from "./_components/page-top-section";
 import { PageConfig, BookingStats } from "./types";
@@ -83,58 +82,58 @@ const BookingsPage = () => {
   };
   return (
     <div className="@container/main flex flex-col gap-6 md:gap-6">
-      <Card className="@container/card gap-4 px-4 shadow-xs sm:px-8">
-        {/* Reusable Page Top Section */}
-        <PageTopSection config={pageConfig} />
-        <div className="rounded bg-gray-100 p-4">
-          <SectionCards cards={bookingCards} />
+      {/* Reusable Page Top Section */}
+      <PageTopSection config={pageConfig} />
+      <div className="rounded bg-gray-100 p-4 md:p-6">
+        <SectionCards cards={bookingCards} />
+      </div>
+      <div className="p-6">
+        <PageFilterSection
+          filters={[
+            {
+              id: "status",
+              label: "Status",
+              placeholder: "Select status",
+              options: [
+                { value: "all", label: "All Bookings" },
+                { value: "pending", label: "Pending" },
+                { value: "confirmed", label: "Confirmed" },
+                { value: "completed", label: "Completed" },
+                { value: "cancelled", label: "Cancelled" },
+              ],
+            },
+            {
+              id: "date-range",
+              label: "Date Range",
+              placeholder: "Select date range",
+              options: [
+                { value: "today", label: "Today" },
+                { value: "week", label: "This Week" },
+                { value: "month", label: "This Month" },
+                { value: "quarter", label: "This Quarter" },
+                { value: "year", label: "This Year" },
+              ],
+            },
+            {
+              id: "service",
+              label: "Service",
+              placeholder: "Select service",
+              options: [
+                { value: "all", label: "All Services" },
+                { value: "consultation", label: "Consultation" },
+                { value: "treatment", label: "Treatment" },
+                { value: "follow-up", label: "Follow-up" },
+              ],
+            },
+          ]}
+        />
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-8">
+          <div className="lg:col-span-8">
+            <BookingsList />
+          </div>
         </div>
-        <div className="my-2">
-          <PageFilterSection
-            filters={[
-              {
-                id: "status",
-                label: "Status",
-                placeholder: "Select status",
-                options: [
-                  { value: "all", label: "All Bookings" },
-                  { value: "pending", label: "Pending" },
-                  { value: "confirmed", label: "Confirmed" },
-                  { value: "completed", label: "Completed" },
-                  { value: "cancelled", label: "Cancelled" },
-                ],
-              },
-              {
-                id: "date-range",
-                label: "Date Range",
-                placeholder: "Select date range",
-                options: [
-                  { value: "today", label: "Today" },
-                  { value: "week", label: "This Week" },
-                  { value: "month", label: "This Month" },
-                  { value: "quarter", label: "This Quarter" },
-                  { value: "year", label: "This Year" },
-                ],
-              },
-              {
-                id: "service",
-                label: "Service",
-                placeholder: "Select service",
-                options: [
-                  { value: "all", label: "All Services" },
-                  { value: "consultation", label: "Consultation" },
-                  { value: "treatment", label: "Treatment" },
-                  { value: "follow-up", label: "Follow-up" },
-                ],
-              },
-            ]}
-          />
-        </div>
-        {/* Data Table Section */}
-        <div className="mt-6">
-          <DataTable data={data} />
-        </div>
-      </Card>
+      </div>
+      {/* Bookings List - 8 column grid */}
     </div>
   );
 };

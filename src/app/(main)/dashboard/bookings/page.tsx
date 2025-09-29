@@ -1,14 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import { Plus, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
-
 import { Card } from "@/components/ui/card";
-
 import { DataTable } from "../default/_components/data-table";
 import data from "../default/_components/data.json";
 import { SectionCards, CardData } from "../default/_components/section-cards";
-
 import PageFilterSection from "./_components/page-filter-section";
 import PageTopSection from "./_components/page-top-section";
 import { PageConfig, BookingStats } from "./types";
@@ -52,12 +49,17 @@ const bookingCards: CardData[] = [
     value: bookingStats.cancelledBookings.value,
     percentage: bookingStats.cancelledBookings.change,
     subtitle: bookingStats.cancelledBookings.trending === "up" ? "increase" : "decrease",
-    icon: <XCircle className="size-6" />,
-    className: "from-primary-foreground text-primary",
+    icon: <XCircle className="size-6 text-destructive/70" />,
+    className: "from-destructive/5 text-destructive/70",
   },
 ];
 
 const BookingsPage = () => {
+  // Filter states
+  const [status, setStatus] = useState<string>("");
+  const [statusSearch, setStatusSearch] = useState<string>("");
+  const [type, setType] = useState<string>("");
+
   // Page configuration for reusable PageTopSection
   const pageConfig: PageConfig = {
     title: "Bookings",
@@ -81,6 +83,7 @@ const BookingsPage = () => {
       },
     ],
   };
+
   return (
     <div className="@container/main flex flex-col gap-6 md:gap-6">
       <Card className="@container/card gap-4 px-4 shadow-xs sm:px-8">
@@ -92,42 +95,38 @@ const BookingsPage = () => {
         <div className="my-2">
           <PageFilterSection
             filters={[
-              {
-                id: "status",
-                label: "Status",
-                placeholder: "Select status",
-                options: [
-                  { value: "all", label: "All Bookings" },
-                  { value: "pending", label: "Pending" },
-                  { value: "confirmed", label: "Confirmed" },
-                  { value: "completed", label: "Completed" },
-                  { value: "cancelled", label: "Cancelled" },
-                ],
-              },
-              {
-                id: "date-range",
-                label: "Date Range",
-                placeholder: "Select date range",
-                options: [
-                  { value: "today", label: "Today" },
-                  { value: "week", label: "This Week" },
-                  { value: "month", label: "This Month" },
-                  { value: "quarter", label: "This Quarter" },
-                  { value: "year", label: "This Year" },
-                ],
-              },
-              {
-                id: "service",
-                label: "Service",
-                placeholder: "Select service",
-                options: [
-                  { value: "all", label: "All Services" },
-                  { value: "consultation", label: "Consultation" },
-                  { value: "treatment", label: "Treatment" },
-                  { value: "follow-up", label: "Follow-up" },
-                ],
-              },
-            ]}
+    {
+      id: "search",
+      label: "Booking",
+      placeholder: "Search booking",
+      options: [],
+      showSearch: true,
+      searchValue: statusSearch,
+      onSearchChange: setStatusSearch,
+    },
+    {
+      id: "status",
+      label: "Status",
+      placeholder: "Select status",
+      options: [
+        { value: "pending", label: "Pending" },
+        { value: "done", label: "Done" },
+      ],
+      value: status,
+      onValueChange: setStatus,
+    },
+    {
+      id: "all_payment",
+      label: "All Payment",
+      placeholder: "All Payment",
+      options: [
+        { value: "online", label: "Online" },
+        { value: "offline", label: "Offline" },
+      ],
+      value: type,
+      onValueChange: setType,
+    },
+  ]}
           />
         </div>
         {/* Data Table Section */}

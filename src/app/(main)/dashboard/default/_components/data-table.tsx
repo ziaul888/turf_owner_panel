@@ -19,16 +19,19 @@ import { withDndColumn } from "../../../../../components/data-table/table-utils"
 
 import { dashboardColumns } from "./columns";
 import { sectionSchema } from "./schema";
+import { log } from "console";
 
 export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
   const [data, setData] = React.useState(() => initialData);
   const columns = withDndColumn(dashboardColumns);
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
+  console.log({table});
+  
 
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between">
-        <Label htmlFor="view-selector" className="sr-only">
+        {/* <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
         <Select defaultValue="outline">
@@ -36,25 +39,25 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof sectionS
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="outline">Outline</SelectItem>
-            <SelectItem value="past-performance">Past Performance</SelectItem>
-            <SelectItem value="key-personnel">Key Personnel</SelectItem>
-            <SelectItem value="focus-documents">Focus Documents</SelectItem>
+            <SelectItem value="outline">Pending</SelectItem>
+            <SelectItem value="past-performance">Confirm</SelectItem>
+            <SelectItem value="key-personnel">Ongoning</SelectItem>
+            <SelectItem value="focus-documents">Complate</SelectItem>
           </SelectContent>
-        </Select>
+        </Select> */}
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="outline">Outline</TabsTrigger>
+          <TabsTrigger value="outline">Pending</TabsTrigger>
           <TabsTrigger value="past-performance">
-            Past Performance <Badge variant="secondary">3</Badge>
+            Confrim <Badge variant="secondary">3</Badge>
           </TabsTrigger>
           <TabsTrigger value="key-personnel">
-            Key Personnel <Badge variant="secondary">2</Badge>
+            Ongoing <Badge variant="secondary">2</Badge>
           </TabsTrigger>
-          <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
+          <TabsTrigger value="focus-documents">Complated</TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
-          <DataTableViewOptions table={table} />
-          <Button variant="outline" size="sm">
+          {/* <DataTableViewOptions table={table} /> */}
+          <Button variant="outline" size="lg">
             <Plus />
             <span className="hidden lg:inline">Add Section</span>
           </Button>

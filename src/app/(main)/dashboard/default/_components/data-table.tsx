@@ -1,8 +1,12 @@
 "use client";
 
+import { log } from "console";
+
 import * as React from "react";
 
-import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+import { FileDown, Plus } from "lucide-react";
 import { z } from "zod";
 
 import { Badge } from "@/components/ui/badge";
@@ -17,34 +21,19 @@ import { DataTablePagination } from "../../../../../components/data-table/data-t
 import { DataTableViewOptions } from "../../../../../components/data-table/data-table-view-options";
 import { withDndColumn } from "../../../../../components/data-table/table-utils";
 
-import { dashboardColumns } from "./columns";
+import { getDashboardColumns } from "./columns";
 import { sectionSchema } from "./schema";
-import { log } from "console";
 
 export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
+  const router = useRouter();
   const [data, setData] = React.useState(() => initialData);
-  const columns = withDndColumn(dashboardColumns);
+  const columns = withDndColumn(getDashboardColumns(router));
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
-  console.log({table});
-  
+  console.log({ table });
 
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between">
-        {/* <Label htmlFor="view-selector" className="sr-only">
-          View
-        </Label>
-        <Select defaultValue="outline">
-          <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
-            <SelectValue placeholder="Select a view" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="outline">Pending</SelectItem>
-            <SelectItem value="past-performance">Confirm</SelectItem>
-            <SelectItem value="key-personnel">Ongoning</SelectItem>
-            <SelectItem value="focus-documents">Complate</SelectItem>
-          </SelectContent>
-        </Select> */}
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
           <TabsTrigger value="outline">Pending</TabsTrigger>
           <TabsTrigger value="past-performance">
@@ -58,14 +47,18 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof sectionS
         <div className="flex items-center gap-2">
           {/* <DataTableViewOptions table={table} /> */}
           <Button variant="outline" size="lg">
-            <Plus />
-            <span className="hidden lg:inline">Add Section</span>
+            <FileDown />
+            PDF
+          </Button>
+          <Button variant="outline" size="lg">
+            <FileDown />
+            CSV
           </Button>
         </div>
       </div>
       <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+          <DataTableNew table={table} columns={columns} onReorder={setData} />
         </div>
         <DataTablePagination table={table} />
       </TabsContent>

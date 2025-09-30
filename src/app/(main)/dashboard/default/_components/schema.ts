@@ -2,10 +2,12 @@ import { z } from "zod";
 
 export const sectionSchema = z.object({
   id: z.number(),
-  header: z.string(),
-  type: z.string(),
+  bookingId: z.string(),
+  customer: z.string(),
+  sportType: z.string(),
+  dateTime: z.string(),
+  amount: z.string(),
   status: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  reviewer: z.string(),
+  payment: z.string(),
+  action: z.string(),
 });

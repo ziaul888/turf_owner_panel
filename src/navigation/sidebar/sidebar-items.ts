@@ -58,10 +58,7 @@ export const sidebarItems: NavGroup[] = [
             url: "/dashboard/default",
             icon: ChartBar,
           },
-          {title:"Notifications",
-            url: "/dashboard/notifications",
-            icon: Mail,
-          },
+          { title: "Notifications", url: "/dashboard/notifications", icon: Mail },
         ],
       },
       // {
@@ -78,6 +75,11 @@ export const sidebarItems: NavGroup[] = [
             title: "All Bookings",
             url: "/dashboard/bookings",
             icon: Calendar,
+          },
+          {
+            title: "Create Booking",
+            url: "/dashboard/bookings/create",
+            icon: SquareArrowUpRight,
           },
           {
             title: "Calendar View",

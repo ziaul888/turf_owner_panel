@@ -1,11 +1,15 @@
 "use client";
+
 import React, { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Plus, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
-import { Card } from "@/components/ui/card";
+
 import { DataTable } from "../default/_components/data-table";
 import data from "../default/_components/data.json";
 import { SectionCards, CardData } from "../default/_components/section-cards";
+
 import PageFilterSection from "./_components/page-filter-section";
 import PageTopSection from "./_components/page-top-section";
 import { PageConfig, BookingStats } from "./types";
@@ -49,12 +53,14 @@ const bookingCards: CardData[] = [
     value: bookingStats.cancelledBookings.value,
     percentage: bookingStats.cancelledBookings.change,
     subtitle: bookingStats.cancelledBookings.trending === "up" ? "increase" : "decrease",
-    icon: <XCircle className="size-6 text-destructive/70" />,
+    icon: <XCircle className="text-destructive/70 size-6" />,
     className: "from-destructive/5 text-destructive/70",
   },
 ];
 
 const BookingsPage = () => {
+  const router = useRouter();
+
   // Filter states
   const [status, setStatus] = useState<string>("");
   const [statusSearch, setStatusSearch] = useState<string>("");
@@ -74,11 +80,11 @@ const BookingsPage = () => {
         },
       },
       {
-        label: "Add Booking",
+        label: "Create Booking",
         icon: <Plus className="size-4" />,
         variant: "default",
         onClick: () => {
-          console.log("Add Booking clicked");
+          router.push("/dashboard/bookings/create");
         },
       },
     ],
@@ -86,54 +92,52 @@ const BookingsPage = () => {
 
   return (
     <div className="@container/main flex flex-col gap-6 md:gap-6">
-      {/* Reusable Page Top Section */}
       <PageTopSection config={pageConfig} />
-      <div className="rounded bg-gray-100 p-4 md:p-6 mx-6">
+      <div className="mx-6 rounded bg-gray-100 p-4 md:p-6">
         <SectionCards cards={bookingCards} />
       </div>
-      <div className="p-6">
-      <PageFilterSection
-            filters={[
-    {
-      id: "search",
-      label: "Booking",
-      placeholder: "Search booking",
-      options: [],
-      showSearch: true,
-      searchValue: statusSearch,
-      onSearchChange: setStatusSearch,
-    },
-    {
-      id: "status",
-      label: "Status",
-      placeholder: "Select status",
-      options: [
-        { value: "pending", label: "Pending" },
-        { value: "done", label: "Done" },
-      ],
-      value: status,
-      onValueChange: setStatus,
-    },
-    {
-      id: "all_payment",
-      label: "All Payment",
-      placeholder: "All Payment",
-      options: [
-        { value: "online", label: "Online" },
-        { value: "offline", label: "Offline" },
-      ],
-      value: type,
-      onValueChange: setType,
-    },
-  ]}
-          />
+      <div className="flex flex-col gap-6 p-6">
+        <PageFilterSection
+          filters={[
+            {
+              id: "search",
+              label: "Booking",
+              placeholder: "Search booking",
+              options: [],
+              showSearch: true,
+              searchValue: statusSearch,
+              onSearchChange: setStatusSearch,
+            },
+            {
+              id: "status",
+              label: "Status",
+              placeholder: "Select status",
+              options: [
+                { value: "pending", label: "Pending" },
+                { value: "done", label: "Done" },
+              ],
+              value: status,
+              onValueChange: setStatus,
+            },
+            {
+              id: "all_payment",
+              label: "All Payment",
+              placeholder: "All Payment",
+              options: [
+                { value: "online", label: "Online" },
+                { value: "offline", label: "Offline" },
+              ],
+              value: type,
+              onValueChange: setType,
+            },
+          ]}
+        />
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-8">
           <div className="lg:col-span-8">
             <DataTable data={data} />
           </div>
         </div>
       </div>
-      {/* Bookings List - 8 column grid */}
     </div>
   );
 };

@@ -54,7 +54,7 @@ These serve as the fallback; there is no separate default.css file. */
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.45 0.20 140);;
+  --primary: oklch(0.566 0.127 187.98);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -71,11 +71,11 @@ These serve as the fallback; there is no separate default.css file. */
   --chart-3: oklch(0.45 0.10 145);
   --chart-4: oklch(0.35 0.08 145);
   --chart-5: oklch(0.25 0.06 145);
-  --sidebar: oklch(0.25 0.12 145);
+  --sidebar: oklch(0.566 0.127 187.98);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.45 0.20 140);
+  --sidebar-accent: oklch(71.668% 0.12145 198.954 / 0.438);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);

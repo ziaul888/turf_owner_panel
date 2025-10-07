@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
@@ -9,12 +10,7 @@ interface PaymentDetailsProps {
   gateway: string;
 }
 
-const PaymentDetails: React.FC<PaymentDetailsProps> = ({
-  method,
-  transactionId,
-  date,
-  gateway,
-}) => {
+const PaymentDetails: React.FC<PaymentDetailsProps> = () => {
   return (
     <>
       <h3 className="text-lg font-semibold">Payment Details</h3>

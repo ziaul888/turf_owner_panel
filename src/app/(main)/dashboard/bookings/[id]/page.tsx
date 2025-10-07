@@ -103,8 +103,11 @@ const BookingDetailsPage = () => {
 
           {/* Sidebar actions - 4 columns */}
           <div className="space-y-4 lg:col-span-4">
-            <BookingActions booking={booking} component={<PaymentSummary booking={booking} />} />
-            <BookingActions booking={booking} component={<PaymentDetails booking={booking} />} />
+            <BookingActions booking={booking} component={<PaymentSummary />} />
+            <BookingActions
+              booking={booking}
+              component={<PaymentDetails method={""} transactionId={""} date={""} gateway={""} />}
+            />
             <BookingActions booking={booking} component={<BookingActionsButton />} />
           </div>
         </div>

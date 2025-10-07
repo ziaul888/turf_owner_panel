@@ -47,7 +47,7 @@ export function TableCellViewer({ item }: { item: z.infer<typeof sectionSchema> 
 
   return (
     <Drawer direction={isMobile ? "bottom" : "right"}>
-      <DrawerTrigger asChild>
+      {/* <DrawerTrigger asChild>
         <Button variant="link" className="text-foreground w-fit px-0 text-left cursor-pointer">
           {item.header}
         </Button>
@@ -179,7 +179,7 @@ export function TableCellViewer({ item }: { item: z.infer<typeof sectionSchema> 
             <Button variant="outline">Done</Button>
           </DrawerClose>
         </DrawerFooter>
-      </DrawerContent>
+      </DrawerContent> */}
     </Drawer>
   );
 }

@@ -43,7 +43,7 @@ const PageTopSection = ({ config }: PageTopSectionProps) => {
   return (
     <div
       ref={ref}
-      className={`bg-background sticky top-0 z-880 flex flex-col items-center justify-between gap-2 border-b py-4 transition-shadow duration-200 sm:flex-row sm:gap-4 md:p-6`}
+      className={`bg-background sticky top-0 z-8 flex flex-col items-center justify-between gap-2 border-b py-4 transition-shadow duration-200 sm:flex-row sm:gap-4 md:p-6`}
     >
       {/* Page Title Section */}
       <div>

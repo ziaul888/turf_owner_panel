@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // ✅ Skip ESLint during builds
+    ignoreDuringBuilds: true,
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

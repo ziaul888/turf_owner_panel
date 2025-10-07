@@ -16,6 +16,7 @@ import {
   UserCog,
   Wallet,
   Clock,
+  LucideIcon
 } from "lucide-react";
 
 export interface NavSubItem {

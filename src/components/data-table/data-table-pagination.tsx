@@ -44,7 +44,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         <div className="ml-auto flex items-center gap-2 lg:ml-0">
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex cursor-pointer"
+            className="hidden h-8 w-8 cursor-pointer p-0 lg:flex"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
@@ -73,7 +73,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
           </Button>
           <Button
             variant="outline"
-            className="hidden size-8 lg:flex cursor-pointer"
+            className="hidden size-8 cursor-pointer lg:flex"
             size="icon"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}

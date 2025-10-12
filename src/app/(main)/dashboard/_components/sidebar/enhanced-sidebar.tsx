@@ -32,9 +32,7 @@ const IsComingSoon = () => (
   <span className="ml-auto rounded-md bg-gray-200 px-2 py-1 text-xs dark:text-gray-800">Soon</span>
 );
 
-const IsNew = () => (
-  <span className="ml-auto rounded-md bg-blue-500 text-white px-2 py-1 text-xs">New</span>
-);
+const IsNew = () => <span className="ml-auto rounded-md bg-blue-500 px-2 py-1 text-xs text-white">New</span>;
 
 interface MenuItemProps {
   item: NavMainItem;
@@ -75,7 +73,7 @@ const MenuItem = ({ item, isActive, isSubmenuOpen, onToggleSubmenu, openSubmenus
               <ChevronRight className="ml-auto h-4 w-4 transition-transform" />
             )}
           </SidebarMenuButton>
-          
+
           {isOpen && (
             <SidebarMenuSub>
               {item.subItems?.map((subItem) => (
@@ -179,7 +177,7 @@ export function EnhancedSidebar({ ...props }: EnhancedSidebarProps) {
   // Initialize open submenus based on current path
   React.useEffect(() => {
     const initialOpenSubmenus = new Set<string>();
-    
+
     sidebarItems.forEach((group) => {
       group.items.forEach((item) => {
         if (item.subItems && isSubmenuOpen(item.subItems)) {
@@ -187,7 +185,7 @@ export function EnhancedSidebar({ ...props }: EnhancedSidebarProps) {
         }
       });
     });
-    
+
     setOpenSubmenus(initialOpenSubmenus);
   }, [pathname]);
 
@@ -196,7 +194,7 @@ export function EnhancedSidebar({ ...props }: EnhancedSidebarProps) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5 cursor-pointer">
+            <SidebarMenuButton asChild className="cursor-pointer data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="#" className="cursor-pointer">
                 <Command />
                 <span className="text-base font-semibold">{APP_CONFIG.name}</span>
@@ -205,7 +203,7 @@ export function EnhancedSidebar({ ...props }: EnhancedSidebarProps) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      
+
       <SidebarContent>
         {sidebarItems.map((group) => (
           <NavGroupComponent
@@ -218,7 +216,7 @@ export function EnhancedSidebar({ ...props }: EnhancedSidebarProps) {
           />
         ))}
       </SidebarContent>
-      
+
       <SidebarFooter>
         <NavUser user={rootUser} />
       </SidebarFooter>

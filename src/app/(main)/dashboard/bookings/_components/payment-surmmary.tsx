@@ -1,7 +1,6 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 
-
 const PaymentSummary: React.FC = () => {
   return (
     <div className="space-y-4">
@@ -25,7 +24,7 @@ const PaymentSummary: React.FC = () => {
       <Separator />
 
       <div className="flex items-center justify-between gap-4">
-        <h1 className="text-gray-700 font-bold">Total</h1>
+        <h1 className="font-bold text-gray-700">Total</h1>
         <p className="font-bold">$600</p>
       </div>
     </div>

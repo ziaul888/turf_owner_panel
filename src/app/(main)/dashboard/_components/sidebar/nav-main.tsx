@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 import { PlusCircleIcon, MailIcon, ChevronRight } from "lucide-react";
 
@@ -38,14 +39,16 @@ const IsComingSoon = () => (
 const NavItemExpanded = ({
   item,
   isActive,
-  isSubmenuOpen,
+  isOpen,
+  onToggle,
 }: {
   item: NavMainItem;
   isActive: (url: string, subItems?: NavMainItem["subItems"]) => boolean;
-  isSubmenuOpen: (subItems?: NavMainItem["subItems"]) => boolean;
+  isOpen: boolean;
+  onToggle: () => void;
 }) => {
   return (
-    <Collapsible key={item.title} asChild defaultOpen={isSubmenuOpen(item.subItems)} className="group/collapsible">
+    <Collapsible key={item.title} asChild open={isOpen} onOpenChange={onToggle} className="group/collapsible">
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
           {item.subItems ? (
@@ -53,12 +56,12 @@ const NavItemExpanded = ({
               disabled={item.comingSoon}
               isActive={isActive(item.url, item.subItems)}
               tooltip={item.title}
-              className="cursor-pointer text-[16px] h-12 text-white"
+              className="h-12 cursor-pointer text-[16px] text-white transition-all duration-200 hover:translate-x-1 hover:bg-white/10"
             >
-              {item.icon && <item.icon />}
-              <span>{item.title}</span>
+              {item.icon && <item.icon className="transition-transform duration-200" />}
+              <span className="transition-all duration-200">{item.title}</span>
               {item.comingSoon && <IsComingSoon />}
-              <ChevronRight className="ml-auto text-white transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              <ChevronRight className="ml-auto text-white transition-all duration-300 ease-in-out group-data-[state=open]/collapsible:scale-110 group-data-[state=open]/collapsible:rotate-90" />
             </SidebarMenuButton>
           ) : (
             <SidebarMenuButton
@@ -77,26 +80,30 @@ const NavItemExpanded = ({
           )}
         </CollapsibleTrigger>
         {item.subItems && (
-          <CollapsibleContent>
-            <SidebarMenuSub>
-              {item.subItems.map((subItem) => (
-                <SidebarMenuSubItem key={subItem.title}>
-                 <SidebarMenuSubButton
-  aria-disabled={subItem.comingSoon}
-  isActive={isActive(subItem.url)}
-  asChild
-  className="cursor-pointer text-[15px] text-white h-10 w-full [&>svg]:text-white"
->
-  <Link
-    href={subItem.url}
-    target={subItem.newTab ? "_blank" : undefined}
-    className="cursor-pointer flex items-center gap-2 text-white"
-  >
-    {subItem.icon && <subItem.icon className="text-white" />}
-    <span>{subItem.title}</span>
-    {subItem.comingSoon && <IsComingSoon />}
-  </Link>
-</SidebarMenuSubButton>
+          <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden transition-all duration-300 ease-in-out">
+            <SidebarMenuSub className="animate-in slide-in-from-left-2 duration-300">
+              {item.subItems.map((subItem, index) => (
+                <SidebarMenuSubItem
+                  key={subItem.title}
+                  className="animate-in fade-in slide-in-from-left-1 duration-300"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <SidebarMenuSubButton
+                    aria-disabled={subItem.comingSoon}
+                    isActive={isActive(subItem.url)}
+                    asChild
+                    className="h-10 w-full cursor-pointer text-[15px] text-white transition-all duration-200 hover:translate-x-1 hover:bg-white/10 [&>svg]:text-white"
+                  >
+                    <Link
+                      href={subItem.url}
+                      target={subItem.newTab ? "_blank" : undefined}
+                      className="flex cursor-pointer items-center gap-2 text-white transition-all duration-200"
+                    >
+                      {subItem.icon && <subItem.icon className="text-white transition-transform duration-200" />}
+                      <span className="transition-all duration-200">{subItem.title}</span>
+                      {subItem.comingSoon && <IsComingSoon />}
+                    </Link>
+                  </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               ))}
             </SidebarMenuSub>
@@ -135,7 +142,7 @@ const NavItemCollapsed = ({
               <SidebarMenuSubButton
                 key={subItem.title}
                 asChild
-                className="focus-visible:ring-0 cursor-pointer"
+                className="cursor-pointer focus-visible:ring-0"
                 aria-disabled={subItem.comingSoon}
                 isActive={isActive(subItem.url)}
               >
@@ -156,6 +163,7 @@ const NavItemCollapsed = ({
 export function NavMain({ items }: NavMainProps) {
   const path = usePathname();
   const { state, isMobile } = useSidebar();
+  const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
 
   const isItemActive = (url: string, subItems?: NavMainItem["subItems"]) => {
     if (subItems?.length) {
@@ -166,6 +174,35 @@ export function NavMain({ items }: NavMainProps) {
 
   const isSubmenuOpen = (subItems?: NavMainItem["subItems"]) => {
     return subItems?.some((sub) => path.startsWith(sub.url)) ?? false;
+  };
+
+  // Initialize open menus based on current path
+  useEffect(() => {
+    const newOpenMenus = new Set<string>();
+
+    items.forEach((group) => {
+      group.items.forEach((item) => {
+        if (item.subItems && isSubmenuOpen(item.subItems)) {
+          newOpenMenus.add(item.title);
+        }
+      });
+    });
+
+    setOpenMenus(newOpenMenus);
+  }, [path, items]);
+
+  const handleMenuToggle = (menuTitle: string) => {
+    setOpenMenus((prev) => {
+      const newOpenMenus = new Set<string>();
+
+      // If the clicked menu is not open, open it and close all others
+      if (!prev.has(menuTitle)) {
+        newOpenMenus.add(menuTitle);
+      }
+      // If the clicked menu is already open, close it (accordion behavior allows closing)
+
+      return newOpenMenus;
+    });
   };
 
   return (
@@ -201,7 +238,13 @@ export function NavMain({ items }: NavMainProps) {
                 }
                 // Expanded view
                 return (
-                  <NavItemExpanded key={item.title} item={item} isActive={isItemActive} isSubmenuOpen={isSubmenuOpen} />
+                  <NavItemExpanded
+                    key={item.title}
+                    item={item}
+                    isActive={isItemActive}
+                    isOpen={openMenus.has(item.title)}
+                    onToggle={() => handleMenuToggle(item.title)}
+                  />
                 );
               })}
             </SidebarMenu>

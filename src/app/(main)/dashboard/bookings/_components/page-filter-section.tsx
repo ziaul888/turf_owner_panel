@@ -54,7 +54,7 @@ const PageFilterSection: React.FC<PageFilterSectionProps> = ({
                   className="focus:ring-primary mb-2 w-72 rounded-md border px-4 py-3 pl-10 text-base shadow-sm outline-none focus:ring-1"
                 />
                 {/* Search icon (Magnifying glass) */}
-                <span className="pointer-events-none absolute top-3 left-3 text-gray-400">
+                <span className="pointer-events-none absolute top-4 left-3 text-gray-400">
                   <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
                     <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="2" />
                     <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M16 16l-3.5-3.5" />

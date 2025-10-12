@@ -87,11 +87,6 @@ export const sidebarItems: NavGroup[] = [
             url: "/dashboard/bookings/calendar",
             icon: Kanban,
           },
-          {
-            title: "Manual Booking",
-            url: "/dashboard/bookings/manual",
-            icon: SquareArrowUpRight,
-          },
         ],
       },
       {

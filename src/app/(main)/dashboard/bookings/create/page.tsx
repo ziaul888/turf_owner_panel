@@ -10,14 +10,14 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 import PageTopSection from "../_components/page-top-section";
 import { PageConfig } from "../types";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 
 // Zod validation schema
 const createBookingSchema = z.object({
@@ -70,7 +70,6 @@ const customerTypes = [
   { id: "new", name: "New Customer", discount: 0 },
 ];
 
-// eslint-disable-next-line complexity
 const CreateBookingPage = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -332,8 +331,8 @@ const CreateBookingPage = () => {
                         control={control}
                         render={({ field }) => (
                           <Select value={field.value} onValueChange={field.onChange} disabled={!selectedVenue}>
-                            {/* eslint-disable-next-line max-lines */}
-                            {/* eslint-disable-next-line max-lines */}
+                            {}
+                            {}
                             <SelectTrigger size="default" className={errors.turfType ? "border-red-500" : ""}>
                               <SelectValue placeholder="Select turf type" />
                             </SelectTrigger>
@@ -552,7 +551,7 @@ const CreateBookingPage = () => {
                     </div>
                   </div>
 
-                  {/*<div className="pt-4">*/}
+                  {/* <div className="pt-4">*/}
                   {/*  <Button type="submit" className="w-full" disabled={isSubmitting || !isValid}>*/}
                   {/*    {isSubmitting ? (*/}
                   {/*      <>*/}
@@ -563,7 +562,7 @@ const CreateBookingPage = () => {
                   {/*      "Create Booking"*/}
                   {/*    )}*/}
                   {/*  </Button>*/}
-                  {/*</div>*/}
+                  {/* </div>*/}
                 </CardContent>
               </Card>
               <div className="rounded-xl border border-green-200 bg-green-50 p-6">

@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+
 import { useRouter } from "next/navigation";
-import { useForm, Controller } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Check, Ban, Clock, Users, MapPin } from "lucide-react";
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -115,7 +117,7 @@ const SimpleFormField = ({
   label,
   required,
   error,
-  children
+  children,
 }: {
   label: string;
   required?: boolean;
@@ -125,7 +127,7 @@ const SimpleFormField = ({
   <div className="space-y-2">
     <label className="text-sm font-medium text-gray-700">
       {label}
-      {required && <span className="text-red-500 ml-1">*</span>}
+      {required && <span className="ml-1 text-red-500">*</span>}
     </label>
     {children}
     {error && <p className="text-sm text-red-500">{error}</p>}
@@ -159,8 +161,12 @@ const CreateSchedulePage = () => {
   });
 
   const watchedValues = watch();
-  const selectedVenue = venues.find((v: { id: string; name: string; capacity: number }) => v.id === watchedValues.venue);
-  const selectedCategory = priceCategories.find((c: { id: string; name: string; description: string }) => c.id === watchedValues.category);
+  const selectedVenue = venues.find(
+    (v: { id: string; name: string; capacity: number }) => v.id === watchedValues.venue,
+  );
+  const selectedCategory = priceCategories.find(
+    (c: { id: string; name: string; description: string }) => c.id === watchedValues.category,
+  );
 
   const onSubmit = async (data: CreateScheduleForm) => {
     setIsSubmitting(true);

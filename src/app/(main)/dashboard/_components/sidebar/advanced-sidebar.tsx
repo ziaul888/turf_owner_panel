@@ -1,10 +1,14 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState, useEffect } from "react";
+
 import { ChevronRight, ChevronDown, Command, Search, Settings, HelpCircle, Bell, User, LogOut } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Sidebar,
   SidebarContent,
@@ -23,8 +27,6 @@ import {
   SidebarSeparator,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { APP_CONFIG } from "@/config/app-config";
 import { rootUser } from "@/data/users";
 import { sidebarItems, type NavGroup, type NavMainItem, type NavSubItem } from "@/navigation/sidebar/sidebar-items";

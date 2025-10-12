@@ -30,7 +30,7 @@ const createBookingSchema = z.object({
     .string()
     .min(10, "Phone number must be at least 10 digits")
     .regex(/^[+]?[0-9\s\-()]+$/, "Please enter a valid phone number"),
-  customerType: z.string().min(1, "Please select a customer type"),
+  customerType: z.string().min(1, "Please select a customers type"),
   venue: z.string().min(1, "Please select a venue"),
   turfType: z.string().min(1, "Please select a turf type"),
   date: z

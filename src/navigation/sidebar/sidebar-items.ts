@@ -16,6 +16,7 @@ import {
   UserCog,
   Wallet,
   Clock,
+  LucideIcon
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -85,11 +86,6 @@ export const sidebarItems: NavGroup[] = [
             title: "Calendar View",
             url: "/dashboard/bookings/calendar",
             icon: Kanban,
-          },
-          {
-            title: "Manual Booking",
-            url: "/dashboard/bookings/manual",
-            icon: SquareArrowUpRight,
           },
         ],
       },

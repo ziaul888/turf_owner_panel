@@ -602,11 +602,9 @@ const CreateBookingPage = () => {
                     Add to Calendar
                   </button>
                   <button className="w-full rounded-lg px-3 py-2 text-left text-sm text-blue-700 hover:bg-blue-100">
-
                     Send Confirmation
                   </button>
                   <button className="w-full rounded-lg px-3 py-2 text-left text-sm text-blue-700 hover:bg-blue-100">
-
                     Print Receipt
                   </button>
                 </div>

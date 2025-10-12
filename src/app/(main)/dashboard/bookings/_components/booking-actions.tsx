@@ -17,12 +17,7 @@ interface BookingActionsProps {
   component?: ReactNode; // 👈 add children support
 }
 
-const BookingActions: React.FC<BookingActionsProps> = ({
-  booking,
-  onEdit,
-  onDelete,
-  component,
-}) => {
+const BookingActions: React.FC<BookingActionsProps> = ({ booking, onEdit, onDelete, component }) => {
   const router = useRouter();
 
   const handleEdit = () => {

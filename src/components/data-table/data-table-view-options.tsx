@@ -21,7 +21,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ml-auto hidden h-8 lg:flex cursor-pointer">
+        <Button variant="outline" size="sm" className="ml-auto hidden h-8 cursor-pointer lg:flex">
           <Settings2 />
           View
         </Button>

@@ -94,24 +94,29 @@ export const sidebarItems: NavGroup[] = [
         ],
       },
       {
-        title: "Schedule",
-        url: "/dashboard/schedule",
+        title: "Slots & Schedule",
+        url: "/dashboard/slots",
         icon: Clock,
         subItems: [
           {
-            title: "Upcoming Schedules",
-            url: "/dashboard/schedule/upcoming",
+            title: "Slot Calendar",
+            url: "/dashboard/slots",
+            icon: Calendar,
+          },
+          {
+            title: "Business Hours",
+            url: "/dashboard/slots/business-hours",
             icon: Clock,
           },
           {
-            title: "Past Schedules",
-            url: "/dashboard/schedule/past",
-            icon: Clock,
-          },
-          {
-            title: "Create Schedule",
-            url: "/dashboard/schedule/create",
+            title: "Slot Generator",
+            url: "/dashboard/slots/generator",
             icon: SquareArrowUpRight,
+          },
+          {
+            title: "Dynamic Pricing",
+            url: "/dashboard/slots/pricing",
+            icon: Banknote,
           },
         ],
       },

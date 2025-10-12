@@ -3,17 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import { 
-  ChevronRight, 
-  ChevronDown, 
-  Command, 
-  Search,
-  Settings,
-  HelpCircle,
-  Bell,
-  User,
-  LogOut
-} from "lucide-react";
+import { ChevronRight, ChevronDown, Command, Search, Settings, HelpCircle, Bell, User, LogOut } from "lucide-react";
 
 import {
   Sidebar,
@@ -44,15 +34,11 @@ interface AdvancedSidebarProps extends React.ComponentProps<typeof Sidebar> {
 }
 
 const IsComingSoon = () => (
-  <span className="ml-auto rounded-md bg-orange-100 text-orange-800 px-2 py-1 text-xs font-medium">
-    Soon
-  </span>
+  <span className="ml-auto rounded-md bg-orange-100 px-2 py-1 text-xs font-medium text-orange-800">Soon</span>
 );
 
 const IsNew = () => (
-  <span className="ml-auto rounded-md bg-blue-100 text-blue-800 px-2 py-1 text-xs font-medium">
-    New
-  </span>
+  <span className="ml-auto rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800">New</span>
 );
 
 interface MenuItemProps {
@@ -82,9 +68,9 @@ const MenuItem = ({ item, isActive, onToggleSubmenu, openSubmenus, level = 0 }: 
             onClick={handleClick}
             isActive={isItemActive}
             tooltip={item.title}
-            className="cursor-pointer group"
+            className="group cursor-pointer"
           >
-            {item.icon && <item.icon className="group-hover:scale-110 transition-transform" />}
+            {item.icon && <item.icon className="transition-transform group-hover:scale-110" />}
             <span className="font-medium">{item.title}</span>
             {item.comingSoon && <IsComingSoon />}
             {item.isNew && <IsNew />}
@@ -94,7 +80,7 @@ const MenuItem = ({ item, isActive, onToggleSubmenu, openSubmenus, level = 0 }: 
               <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-200" />
             )}
           </SidebarMenuButton>
-          
+
           {isOpen && (
             <SidebarMenuSub>
               {item.subItems?.map((subItem) => (
@@ -106,7 +92,7 @@ const MenuItem = ({ item, isActive, onToggleSubmenu, openSubmenus, level = 0 }: 
                     className="group cursor-pointer"
                   >
                     <Link href={subItem.url} target={subItem.newTab ? "_blank" : undefined} className="cursor-pointer">
-                      {subItem.icon && <subItem.icon className="group-hover:scale-110 transition-transform" />}
+                      {subItem.icon && <subItem.icon className="transition-transform group-hover:scale-110" />}
                       <span>{subItem.title}</span>
                       {subItem.comingSoon && <IsComingSoon />}
                       {subItem.isNew && <IsNew />}
@@ -126,7 +112,7 @@ const MenuItem = ({ item, isActive, onToggleSubmenu, openSubmenus, level = 0 }: 
           className="group cursor-pointer"
         >
           <Link href={item.url} target={item.newTab ? "_blank" : undefined} className="cursor-pointer">
-            {item.icon && <item.icon className="group-hover:scale-110 transition-transform" />}
+            {item.icon && <item.icon className="transition-transform group-hover:scale-110" />}
             <span className="font-medium">{item.title}</span>
             {item.comingSoon && <IsComingSoon />}
             {item.isNew && <IsNew />}
@@ -148,7 +134,7 @@ const NavGroupComponent = ({ group, isActive, onToggleSubmenu, openSubmenus }: N
   return (
     <SidebarGroup key={group.id}>
       {group.label && (
-        <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+        <SidebarGroupLabel className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
           {group.label}
         </SidebarGroupLabel>
       )}
@@ -172,7 +158,7 @@ const NavGroupComponent = ({ group, isActive, onToggleSubmenu, openSubmenus }: N
 const QuickActions = () => {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+      <SidebarGroupLabel className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
         Quick Actions
       </SidebarGroupLabel>
       <SidebarGroupContent>
@@ -182,7 +168,7 @@ const QuickActions = () => {
               <Link href="/dashboard/notifications" className="cursor-pointer">
                 <Bell className="h-4 w-4" />
                 <span>Notifications</span>
-                <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">3</span>
+                <span className="ml-auto rounded-full bg-red-500 px-2 py-1 text-xs text-white">3</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -214,13 +200,13 @@ const UserProfile = () => {
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <div className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition-colors cursor-pointer">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <div className="hover:bg-accent flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600">
                 <User className="h-4 w-4 text-white" />
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{rootUser.name}</p>
-                <p className="text-xs text-muted-foreground truncate">{rootUser.email}</p>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium">{rootUser.name}</p>
+                <p className="text-muted-foreground truncate text-xs">{rootUser.email}</p>
               </div>
             </div>
           </SidebarMenuItem>
@@ -283,7 +269,7 @@ export function AdvancedSidebar({ onSearch, ...props }: AdvancedSidebarProps) {
   // Initialize open submenus based on current path
   useEffect(() => {
     const initialOpenSubmenus = new Set<string>();
-    
+
     sidebarItems.forEach((group) => {
       group.items.forEach((item) => {
         if (item.subItems && isSubmenuOpen(item.subItems)) {
@@ -291,7 +277,7 @@ export function AdvancedSidebar({ onSearch, ...props }: AdvancedSidebarProps) {
         }
       });
     });
-    
+
     setOpenSubmenus(initialOpenSubmenus);
   }, [pathname]);
 
@@ -300,40 +286,40 @@ export function AdvancedSidebar({ onSearch, ...props }: AdvancedSidebarProps) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5 cursor-pointer">
-              <a href="#" className="flex items-center gap-2 cursor-pointer">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <SidebarMenuButton asChild className="cursor-pointer data-[slot=sidebar-menu-button]:!p-1.5">
+              <a href="#" className="flex cursor-pointer items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
                   <Command className="h-4 w-4 text-white" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-base font-bold">{APP_CONFIG.name}</span>
-                  <span className="text-xs text-muted-foreground">Admin Panel</span>
+                  <span className="text-muted-foreground text-xs">Admin Panel</span>
                 </div>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        
+
         {/* Search Bar */}
         <form onSubmit={handleSearch} className="px-2">
           <div className="relative">
-            <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="text-muted-foreground absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2 transform" />
             <Input
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8 h-8 text-sm"
+              className="h-8 pl-8 text-sm"
             />
           </div>
         </form>
       </SidebarHeader>
-      
+
       <SidebarContent className="space-y-2">
         {/* Quick Actions */}
         <QuickActions />
-        
+
         <SidebarSeparator />
-        
+
         {/* Main Navigation */}
         {sidebarItems.map((group) => (
           <NavGroupComponent
@@ -345,7 +331,7 @@ export function AdvancedSidebar({ onSearch, ...props }: AdvancedSidebarProps) {
           />
         ))}
       </SidebarContent>
-      
+
       <SidebarFooter>
         <UserProfile />
       </SidebarFooter>

@@ -17,7 +17,7 @@ export function SidebarDemo() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       <div className="flex">
         {/* Sidebar */}
         <SidebarProvider>
@@ -28,9 +28,9 @@ export function SidebarDemo() {
 
         {/* Main Content */}
         <main className="flex-1 p-6">
-          <div className="max-w-4xl mx-auto">
+          <div className="mx-auto max-w-4xl">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold mb-2">Sidebar Component Demo</h1>
+              <h1 className="mb-2 text-3xl font-bold">Sidebar Component Demo</h1>
               <p className="text-muted-foreground">
                 Explore different variations of the sidebar component with menu and submenu functionality.
               </p>
@@ -38,18 +38,22 @@ export function SidebarDemo() {
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="original" className="cursor-pointer">Original</TabsTrigger>
-                <TabsTrigger value="enhanced" className="cursor-pointer">Enhanced</TabsTrigger>
-                <TabsTrigger value="advanced" className="cursor-pointer">Advanced</TabsTrigger>
+                <TabsTrigger value="original" className="cursor-pointer">
+                  Original
+                </TabsTrigger>
+                <TabsTrigger value="enhanced" className="cursor-pointer">
+                  Enhanced
+                </TabsTrigger>
+                <TabsTrigger value="advanced" className="cursor-pointer">
+                  Advanced
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="original" className="space-y-4">
                 <Card>
                   <CardHeader>
                     <CardTitle>Original Sidebar</CardTitle>
-                    <CardDescription>
-                      The original sidebar implementation with basic menu structure.
-                    </CardDescription>
+                    <CardDescription>The original sidebar implementation with basic menu structure.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
@@ -65,9 +69,7 @@ export function SidebarDemo() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Enhanced Sidebar</CardTitle>
-                    <CardDescription>
-                      Enhanced version with improved menu and submenu functionality.
-                    </CardDescription>
+                    <CardDescription>Enhanced version with improved menu and submenu functionality.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
@@ -84,9 +86,7 @@ export function SidebarDemo() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Advanced Sidebar</CardTitle>
-                    <CardDescription>
-                      Advanced sidebar with search, quick actions, and enhanced UX.
-                    </CardDescription>
+                    <CardDescription>Advanced sidebar with search, quick actions, and enhanced UX.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">

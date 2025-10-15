@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PageTopSection from "../bookings/_components/page-top-section";
 import { PageConfig } from "../bookings/types";
 import { SectionCards, CardData } from "../default/_components/section-cards";
+import { SlotGeneratorSheet } from "./_components/slot-generator-sheet";
 
 // Mock slot data
 const mockSlots = [
@@ -114,6 +115,12 @@ const SlotsPage = () => {
   const [viewMode, setViewMode] = useState<"day" | "week" | "month">("day");
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  const handleSlotsGenerated = (slots: any[]) => {
+    console.log("New slots generated:", slots);
+    // Here you would typically update your slots state or refetch data
+    // For now, we'll just log the generated slots
+  };
+
   const pageConfig: PageConfig = {
     title: "Slot Calendar",
     subtitle: "Manage your field slots and availability",
@@ -123,12 +130,6 @@ const SlotsPage = () => {
         icon: <Settings className="size-4" />,
         variant: "outline",
         onClick: () => router.push("/dashboard/slots/business-hours"),
-      },
-      {
-        label: "Generate Slots",
-        icon: <Plus className="size-4" />,
-        variant: "default",
-        onClick: () => router.push("/dashboard/slots/generator"),
       },
     ],
   };
@@ -204,6 +205,19 @@ const SlotsPage = () => {
   return (
     <div className="@container/main flex flex-col gap-6 md:gap-6">
       <PageTopSection config={pageConfig} />
+      
+      {/* Quick Actions */}
+      <div className="flex justify-end px-6">
+        <SlotGeneratorSheet 
+          onSlotsGenerated={handleSlotsGenerated}
+          trigger={
+            <Button>
+              <Plus className="mr-2 size-4" />
+              Generate Slots
+            </Button>
+          }
+        />
+      </div>
 
       {/* Stats Cards */}
       <div className="mx-6 rounded bg-gray-100 p-4 md:p-6">

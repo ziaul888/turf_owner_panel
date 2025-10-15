@@ -37,12 +37,12 @@ const PageFilterSection: React.FC<PageFilterSectionProps> = ({
   const selectFilters = filters.filter((f) => !f.showSearch);
 
   return (
-    <Card className="@container/card p-6">
+    <Card className="@container/card p-4 sm:p-6">
       <div className={`flex-col gap-4 space-y-4 ${className}`}>
-        <h1 className="font-bold text-black">{title}</h1>
-        <div className="flex w-full flex-wrap items-center justify-between gap-4">
-          {/* Search input on the left */}
-          <div className="relative">
+        <h1 className="font-bold text-black text-lg sm:text-xl">{title}</h1>
+        <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {/* Search input */}
+          <div className="relative flex-1 sm:flex-initial">
             {searchFilter && (
               <>
                 <Label className="sr-only">{searchFilter.label}</Label>
@@ -51,10 +51,10 @@ const PageFilterSection: React.FC<PageFilterSectionProps> = ({
                   value={searchFilter.searchValue ?? ""}
                   onChange={(e) => searchFilter.onSearchChange?.(e.target.value)}
                   placeholder={`Search ${searchFilter.label}`}
-                  className="focus:ring-primary mb-2 w-72 rounded-md border px-4 py-3 pl-10 text-base shadow-sm outline-none focus:ring-1"
+                  className="focus:ring-primary w-full rounded-md border px-4 py-3 pl-10 text-base shadow-sm outline-none focus:ring-1 sm:w-72"
                 />
                 {/* Search icon (Magnifying glass) */}
-                <span className="pointer-events-none absolute top-4 left-3 text-gray-400">
+                <span className="pointer-events-none absolute top-3.5 left-3 text-gray-400">
                   <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
                     <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="2" />
                     <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M16 16l-3.5-3.5" />
@@ -64,13 +64,13 @@ const PageFilterSection: React.FC<PageFilterSectionProps> = ({
             )}
           </div>
 
-          {/* Select boxes on the right */}
-          <div className="flex gap-4">
+          {/* Select boxes */}
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
             {selectFilters.map((filter) => (
-              <div key={filter.id}>
+              <div key={filter.id} className="w-full sm:w-auto">
                 <Label className="sr-only">{filter.label}</Label>
                 <Select value={filter.value} onValueChange={filter.onValueChange}>
-                  <SelectTrigger className="w-48" size="default" id={filter.id}>
+                  <SelectTrigger className="w-full sm:w-48" size="default" id={filter.id}>
                     <SelectValue placeholder={filter.placeholder} />
                   </SelectTrigger>
                   <SelectContent align="end">

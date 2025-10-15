@@ -22,7 +22,7 @@ interface PageTopSectionProps {
 }
 
 const PageTopSection = ({ config }: PageTopSectionProps) => {
-  const [isSticky, setIsSticky] = useState(false);
+  const [, setIsSticky] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,27 +43,32 @@ const PageTopSection = ({ config }: PageTopSectionProps) => {
   return (
     <div
       ref={ref}
-      className={`bg-background sticky top-0 z-8 flex flex-col items-center justify-between gap-2 border-b py-4 transition-shadow duration-200 sm:flex-row sm:gap-4 md:p-6`}
+      className={`bg-background sticky top-0 z-8 flex flex-col items-start justify-between gap-3 border-b px-4 py-3 transition-shadow duration-200 sm:flex-row sm:items-center sm:gap-4 sm:px-6 sm:py-4 md:px-8 md:py-6`}
     >
       {/* Page Title Section */}
-      <div>
-        <h1 className="text-2xl font-bold">{config.title}</h1>
-        {config.subtitle && <p className="text-muted-foreground text-sm">{config.subtitle}</p>}
+      <div className="min-w-0 flex-1">
+        <h1 className="text-xl font-bold sm:text-2xl lg:text-3xl">{config.title}</h1>
+        {config.subtitle && (
+          <p className="text-muted-foreground mt-1 text-xs sm:text-sm lg:text-base">
+            {config.subtitle}
+          </p>
+        )}
       </div>
 
       {/* Actions Section */}
       {config.actions && config.actions.length > 0 && (
-        <div className="flex gap-2">
+        <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:flex-nowrap">
           {config.actions.map((action, index) => (
             <Button
               key={`${action.label}-${index}`}
               variant={action.variant ?? "default"}
-              size={action.size ?? "lg"}
+              size={action.size ?? "sm"}
               onClick={action.onClick}
               disabled={action.disabled}
+              className="flex-1 sm:flex-none"
             >
-              {action.icon}
-              {action.label}
+              {action.icon && <span className="mr-1 sm:mr-2">{action.icon}</span>}
+              <span className="text-xs sm:text-sm">{action.label}</span>
             </Button>
           ))}
         </div>

@@ -13,31 +13,11 @@ import { CardData, SectionCards } from "@/app/(main)/dashboard/default/_componen
 
 
 import data from "../_components/data.json"
-import { DataTable } from "@/app/(main)/dashboard/default/_components/data-table";
+import { CustomerDataTable } from "../_components/customer-data-table";
+import { AddCustomerSheet } from "../_components/add-customer-sheet";
 
 
-const pageConfig: PageConfig = {
-  title: "Customer Management",
-  subtitle: "Manage customer profiles, booking history, and loyalty status",
-  actions: [
-    {
-      label: "Export",
-      icon: <Download className="size-4" />,
-      variant: "outline",
-      onClick: () => {
-        console.log("Import clicked");
-      },
-    },
-    {
-      label: "Add Customer",
-      icon: <Plus className="size-4" />,
-      variant: "default",
-      onClick: () => {
-        // router.push("/dashboard/bookings/create");
-      },
-    },
-  ],
-};
+
 // Mock booking stats - replace with your actual data source
 const bookingStats: BookingStats = {
   totalBookings: { value: "1,234", change: "-20%", trending: "down" },
@@ -85,6 +65,33 @@ const Page = () => {
   const [status, setStatus] = useState<string>("");
   const [statusSearch, setStatusSearch] = useState<string>("");
   const [type, setType] = useState<string>("");
+  const [customers, setCustomers] = useState(data);
+  const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
+
+  const handleCustomerAdded = (newCustomer: any) => {
+    setCustomers(prev => [newCustomer, ...prev]);
+  };
+
+  const pageConfig: PageConfig = {
+    title: "Customer Management",
+    subtitle: "Manage customer profiles, booking history, and loyalty status",
+    actions: [
+      {
+        label: "Export",
+        icon: <Download className="size-4" />,
+        variant: "outline",
+        onClick: () => {
+          console.log("Import clicked");
+        },
+      },
+      {
+        label: "Add Customer",
+        icon: <Plus className="size-4" />,
+        variant: "default",
+        onClick: () => setIsAddCustomerOpen(true),
+      },
+    ],
+  };
 
   return (
     <div className="@container/main flex flex-col gap-6 md:gap-6">
@@ -142,10 +149,17 @@ const Page = () => {
         />
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-8">
           <div className="lg:col-span-8">
-            <DataTable  data={data} />
+            <CustomerDataTable data={customers} />
           </div>
         </div>
       </div>
+
+      {/* Add Customer Sheet */}
+      <AddCustomerSheet
+        isOpen={isAddCustomerOpen}
+        onOpenChange={setIsAddCustomerOpen}
+        onCustomerAdded={handleCustomerAdded}
+      />
     </div>
   );
 };

@@ -1,3 +1,16 @@
+/**
+ * SlotGeneratorForm Component
+ * 
+ * This component provides the form interface for generating time slots.
+ * It's designed to be used within the SlotGeneratorSheet offcanvas component.
+ * 
+ * Features:
+ * - Field selection
+ * - Slot duration configuration (preset or custom)
+ * - Date range selection
+ * - Day of week selection with quick presets
+ * - Time range and pricing configuration
+ */
 import React from "react";
 
 import { Calendar, Clock } from "lucide-react";

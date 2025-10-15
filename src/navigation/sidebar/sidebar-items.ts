@@ -105,11 +105,6 @@ export const sidebarItems: NavGroup[] = [
             icon: Clock,
           },
           {
-            title: "Slot Generator",
-            url: "/dashboard/slots/generator",
-            icon: SquareArrowUpRight,
-          },
-          {
             title: "Dynamic Pricing",
             url: "/dashboard/slots/pricing",
             icon: Banknote,

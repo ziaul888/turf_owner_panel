@@ -4,61 +4,35 @@ import * as React from "react";
 
 import { useRouter } from "next/navigation";
 
-import { FileDown, Plus } from "lucide-react";
 import { z } from "zod";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 
 import { DataTable as DataTableNew } from "../../../../../components/data-table/data-table";
 import { DataTablePagination } from "../../../../../components/data-table/data-table-pagination";
 import { withDndColumn } from "../../../../../components/data-table/table-utils";
+import { customerSchema } from "./customer-schema";
+import { getCustomerColumns } from "./customer-columns";
 
-import { getDashboardColumns } from "./columns";
-import { sectionSchema } from "./schema";
 
-export function DataTable({
+
+export function CustomerDataTable({
   data: initialData,
-  noTableTab
+  
 }: {
-  data: z.infer<typeof sectionSchema>[];
-  noTableTab: boolean;
+  data: z.infer<typeof customerSchema>[];
+  
 }) {
   const router = useRouter();
   const [data, setData] = React.useState(() => initialData);
-  const columns = withDndColumn(getDashboardColumns(router));
+  const columns = withDndColumn(getCustomerColumns(router));
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
   console.log({ data });
 
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
-      {!noTableTab && (
-        <div className="flex items-center justify-between">
-          <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-            <TabsTrigger value="outline">Pending</TabsTrigger>
-            <TabsTrigger value="past-performance">
-              Confrim <Badge variant="secondary">3</Badge>
-            </TabsTrigger>
-            <TabsTrigger value="key-personnel">
-              Ongoing <Badge variant="secondary">2</Badge>
-            </TabsTrigger>
-            <TabsTrigger value="focus-documents">Complated</TabsTrigger>
-          </TabsList>
-          <div className="flex items-center gap-2">
-            {/* <DataTableViewOptions table={table} /> */}
-            <Button variant="outline" size="lg">
-              <FileDown />
-              PDF
-            </Button>
-            <Button variant="outline" size="lg">
-              <FileDown />
-              CSV
-            </Button>
-          </div>
-        </div>
-      )}
+      
       <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
           <DataTableNew table={table} columns={columns} onReorder={setData} />

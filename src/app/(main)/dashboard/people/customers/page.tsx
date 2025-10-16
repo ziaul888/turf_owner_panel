@@ -155,7 +155,7 @@ const Page = () => {
             </div>
             
             {/* View Toggle */}
-            <div className="flex items-center gap-1 border rounded-lg p-1">
+            {/* <div className="flex items-center gap-1 border rounded-lg p-1">
               <Button
                 variant={viewMode === "table" ? "default" : "ghost"}
                 size="sm"
@@ -172,7 +172,7 @@ const Page = () => {
               >
                 <Grid3X3 className="h-4 w-4" />
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-6">

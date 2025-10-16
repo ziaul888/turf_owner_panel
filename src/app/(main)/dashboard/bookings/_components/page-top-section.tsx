@@ -47,7 +47,7 @@ const PageTopSection = ({ config }: PageTopSectionProps) => {
     >
       {/* Page Title Section */}
       <div className="min-w-0 flex-1">
-        <h1 className="text-xl font-bold sm:text-2xl lg:text-3xl">{config.title}</h1>
+        <h1 className="text-xl font-bold sm:text-2xl lg:text-2xl">{config.title}</h1>
         {config.subtitle && (
           <p className="text-muted-foreground mt-1 text-xs sm:text-sm lg:text-base">
             {config.subtitle}

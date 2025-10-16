@@ -21,7 +21,7 @@ export const CustomerGridView: React.FC<CustomerGridViewProps> = ({
   const router = useRouter();
 
   const handleViewDetails = (customer: Customer) => {
-    const customerId = customer.customerId.replace("#CU-", "");
+    const customerId = customer.customerId.replace("#", "");
     router.push(`/dashboard/people/customers/${customerId}`);
   };
 

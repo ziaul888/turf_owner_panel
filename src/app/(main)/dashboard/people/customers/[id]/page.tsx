@@ -36,8 +36,12 @@ const CustomerDetailsPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const customerId = `#CU-${params.id}`;
-    const foundCustomer = data.find(c => c.customerId === customerId);
+    // The URL param comes without the # (e.g., "CU-2024-001")
+    // But the data has the # prefix (e.g., "#CU-2024-001")
+    const customerIdFromUrl = params.id as string;
+    const fullCustomerId = customerIdFromUrl.startsWith('#') ? customerIdFromUrl : `#${customerIdFromUrl}`;
+    
+    const foundCustomer = data.find(c => c.customerId === fullCustomerId);
     setCustomer(foundCustomer || null);
     setLoading(false);
   }, [params.id]);

@@ -128,7 +128,7 @@ export const AddCustomerSheet: React.FC<AddCustomerSheetProps> = ({
         </SheetHeader>
 
         {/* Form Content */}
-        <div className="flex-1 overflow-y-auto px-4 pb-4">
+        <div className="flex-1 overflow-y-auto  px-4 pb-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {/* Basic Information */}
